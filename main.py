@@ -1,13 +1,15 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 from core.config import settings
-from core.routes import routeStatic
 import urls
 import uvicorn
 
 app = FastAPI(
     title=settings.PROJECT_NAME
 )
+
+static = FastAPI()
 
 if len(settings.BACKEND_CORS_ORIGINS):
     app.add_middleware(
@@ -22,7 +24,9 @@ if len(settings.BACKEND_CORS_ORIGINS):
 app.include_router(urls.Router())
 
 # public folder
-app.include_router(routeStatic)
+app.mount("/%s" % settings.PUBLIC_FOLDER,
+          StaticFiles(directory=settings.PUBLIC_FOLDER),
+          name=settings.PUBLIC_FOLDER)
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=settings.PORT, host=settings.HOST, log_level="info")
