@@ -1,0 +1,7 @@
+from core.views import router, render
+
+
+@router.get('/{appName}')
+async def index():
+    data = {}
+    return await render('{appName}', data)

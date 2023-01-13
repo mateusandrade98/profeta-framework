@@ -1,0 +1,12 @@
+pydantic~=1.10.4
+passlib~=1.7.4
+python-jose~=3.3.0
+pymongo~=4.3.3
+fastapi~=0.89.1
+pydantic[email]
+uvicorn[standard]~=0.20.0
+starlette==0.23.1
+Jinja2~=3.1.2
+aiofile~=3.8.1
+python-magic~=0.4.27
+python-magic-bin==0.4.14
